@@ -1193,7 +1193,7 @@ function drawOneRecord(rrs)
 	setState(`${x}/${ctx.rec.type}`, { state: "record", server: gbl.server, zone: ctx.zone, name:ctx.rec.name, type: ctx.rec.type });
 
 	x = "<table width=100%>";
-	x += '<colgroup><col width="10%" /><col width="25%" /><col width="99px" /><col /><col width="75%" /></colgroup>'
+	x += '<colgroup><col width="10%" /><col width="25%" /><col width="99" /><col /><col width="75%" /></colgroup>'
 	for(let idx in ctx.rec.rrs.records) {
 		let i = ctx.rec.rrs.records[idx];
 		x += "<tr class=dataRow>"
@@ -1658,7 +1658,7 @@ function showKeys(data)
 
 	let x = "<table width=100%>";
 	x += "<tr><td width=100%><table width=100%><colgroup>";
-	for(let i=0;i<5;i++) x += '<col width="50px">';
+	for(let i=0;i<5;i++) x += '<col width="50">';
 	x += "</colgroup><tr>";
 
 	for (let i of ["Active","Id","Type/Flags","Bits","Algrythm",""])
