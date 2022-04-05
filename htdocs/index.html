@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <!--- (c) Copyright 2019-2021, James Stevens ... see LICENSE for details --->
 <!--- Alternative license arrangements are possible, contact me for more information --->
 <html>
 <head>
 	<title>PowerDNS WebUI - Login</title>
-</head>
 <script language="Javascript">
 	const debugAPI = false;
 </script>
@@ -2774,12 +2774,8 @@ function keyEsc(e) {
 
 //=============================================================================================
 </script>
-
-
-
-<head>
-	<title>PowerDNS WebUI - Login</title>
 </head>
+
 <body onLoad="startUp();">
 
 <div id="topSpan">
@@ -2789,28 +2785,29 @@ function keyEsc(e) {
 </div>
 
 <div id="lowerSpan">
-	<table align=center>
+
 	<form action="/" onSubmit="return initialLogin()" name=loginForm>
+	<table align=center>
 		<tr><td class=formPrompt>Server:</td><td><input title="PowerDNS RestAPI, can include optional :[port] and sub-directory" name=server size=40 value=""></td></tr>
 		<tr><td class=formPrompt>API-Key:</td><td><input autocomplete="current-password" type=password size=40 name=apikey value=""></td></tr>
 		<tr><td class=formPrompt>HTTPS (SSL/TLS):</td><td><input title="Connect to API over HTTPS, not HTTP" type=checkbox name=with_https></td></tr>
 		<tr><td class=formPrompt>Fast Zone List:</td><td><input title="Fast load long zone lists by excluding some information" type=checkbox name=fast_zone_list></td></tr>
 		<tr><td align=center colspan=2><span title="Load zone list" class=myBtn onClick="initialLogin()">Load Zone List</span></td></tr>
 		</tr>
+	</table>
 	<input type=submit style="display: none;">
 	</form>
-	</table>
-<P>
+<p></p>
 <div class='fullvis' id="lowerMsg"></div>
 </div>
 
 
 
 <div id=addZone style="display: none;">
+	<form method=post action="/" name=newZoneForm onSubmit="return doNewZone();">
 	<table width=40% align=center><tbody id="startBody">
 	<colgroup><col width=35%/><col width=65%/></colgroup>
 	<tr><td colspan=2 align=center><h2>Add a New Zone</h2></td></tr>
-	<form method=post action="/" name=newZoneForm onSubmit="return doNewZone();">
 		<tr><td class=formPrompt>Name :</td><td><input onkeydown="keyEsc(event);" name=zoneName></td></tr>
 		<tr><td class=formPrompt>Type :</td><td><select onChange="zoneKindChange(this);" name=zoneKind><option>Master<option>Slave<option>Native</select></td></tr>
 		</tbody><tbody id="asMaster">
@@ -2828,19 +2825,18 @@ function keyEsc(e) {
 		</tbody>
 		<tr><td colspan=2><hr></td></tr>
 		<tr><td align=center colspan=2><span title="Cancel adding zone" class=myBtn onClick="zoneList();">Cancel</span><span title="Add new zone" class=myBtn onClick="doNewZone();">Add Zone</span></td></tr>
-		</tr>
+	</table>
 	<input type=submit style="display: none;">
 	</form>
-	</table>
 </div>
 
 
 
 <div id=addName style="display: none;">
+	<form method=post action="/" name=newNameForm onSubmit="return doNewName();">
 	<table width=40% align=center>
 	<colgroup><col width=35%/><col width=65%/></colgroup>
 	<tr><td colspan=2 align=center><h2>Add a New Host</h2></td></tr>
-	<form method=post action="/" name=newNameForm onSubmit="return doNewName();">
 		<tr><td class=formPrompt>Host name:</td><td><input onkeydown="keyEsc(event);" name=rrName></td></tr>
 		<tr><td class=formPrompt>RR Type:</td><td><select name=rrType>
 			<option>A<option>AAAA<option>MX<option>NS<option>TXT
@@ -2861,29 +2857,28 @@ function keyEsc(e) {
 		<tr><td class=formPrompt>TTL:</td><td><input value=86400 name=rrTTL></td></tr>
 		<tr><td colspan=2><hr></td></tr>
 		<tr><td align=center colspan=2><span class=myBtn title="Cancel adding RR" onClick="loadThisZone();">Cancel</span><span title="Add this RR" class=myBtn onClick="doNewName();">Add Record</span></td></tr>
-		</tr>
+	</table>
 	<input type=submit style="display: none;">
 	</form>
-	</table>
 </div>
 
 
 <div id=addTsig style="display: none;">
+	<form method=post action="/" name=newTsigForm onSubmit="return formAddTsig();">
 	<table width=40% align=center>
 	<colgroup><col width=35%/><col width=65%/></colgroup>
 	<tr><td colspan=2 align=center><h2>Add a New TSIG Key</h2></td></tr>
-	<form method=post action="/" name=newTsigForm onSubmit="return formAddTsig();">
 		<tr><Td class=formPrompt>TSIG Name: </td><td><input size=50 name=tsigName></td></tr>
 		<tr><td class=formPrompt>TSIG Algrythm: </td><td><select name=tsigAlg>
 			<option value="hmac-sha512">HMAC-SHA512<option value="hmac-sha384">HMAC-SHA384<option value="hmac-sha256">HMAC-SHA256
 			<option value="hmac-sha224">HMAC-SHA224<option value="hmac-sha1">HMAC-SHA1<option value="hmac-md5">HMAC-MD5
 		</select></td></tr>
-		<tr><Td class=formPrompt>TSIG Key: </td><td><input placeholder='Leave blank, for auto-generated key' size=100 name=tsigKey></td></tr>
+		<tr><td class=formPrompt>TSIG Key: </td><td><input placeholder='Leave blank, for auto-generated key' size=100 name=tsigKey></td></tr>
 		<tr><td colspan=2><hr></td></tr>
 		<tr><td align=center colspan=2><span class=myBtn title="Cancel adding a TSIG Key" onClick="loadTsigList();">Cancel</span><span title="Add this TSIG Key" class=myBtn onClick="formAddTsig();">Add TSIG</span></td></tr>
+	</table>
 	<input type=submit style="display: none;">
 	</form>
-	</table>
 </div>
 
 <div id=myMsgPop class='msgPop msgPopNo'></div>
