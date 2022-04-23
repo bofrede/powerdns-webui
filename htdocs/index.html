@@ -10,10 +10,13 @@
 
 
 <style>
-
-.fullvis { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14pt; visibility: visible; opacity: 1; text-align: center; }
-.fadein  { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14pt; visibility: visible; opacity: 1; transition: opacity 0.5s linear; }
-.fadeout { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14pt; visibility: hidden; opacity: 0; transition: visibility 0s 1s, opacity 1s linear; }
+body, td, th, input, select, textarea, button {
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10pt;
+}
+.fullvis { font-size:14pt; visibility: visible; opacity: 1; text-align: center; }
+.fadein  { font-size:14pt; visibility: visible; opacity: 1; transition: opacity 0.5s linear; }
+.fadeout { font-size:14pt; visibility: hidden; opacity: 0; transition: visibility 0s 1s, opacity 1s linear; }
 
 #topSpan{
 	background-color: #666688;
@@ -29,8 +32,6 @@
 
 html {
 	color: white;
-	font-family:Verdana,Arial,Helvetica,sans-serif;
-	font-size:10pt;
 	background-color:#666688;
 	scrollbar-base-color:#666699;
 	scrollbar-arrow-color:#ddddff;
@@ -38,8 +39,6 @@ html {
 
 th {
 	color: black;
-	font-family:Verdana,Arial,Helvetica,sans-serif;
-	font-size:10pt;
 	background-color:#a0a0cc;
 	font-weight: bold;
 	padding-left: 6px;
@@ -48,28 +47,22 @@ th {
 
 select {
 	color: black;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 8pt;
 	}
 
 input {
 	color: black;
 	background-color: white;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 8pt;
 	}
 
 .inputBad {
 	color: black;
 	background-color: #ffd0d0;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size: 8pt;
 	}
 
 body {
 	color: white;
-	font-family:Verdana,Arial,Helvetica,sans-serif;
-	font-size:10pt;
 	margin-top: 0px;
 	background-color:#666688;
 	scrollbar-base-color:#666699;
@@ -95,7 +88,6 @@ form {
 	display: inline-block;
 	background-color: #d0d0ff;
 	color: black;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 10pt;
 	font-weight: bold;
 	border-radius: 25px;
@@ -127,8 +119,6 @@ form {
 	}
 
 td {
-	font-family:Verdana,Arial,Helvetica,sans-serif;
-	font-size:10pt;
 	vertical-align: top;
 	padding-left: 7px;
 	padding-right: 7px;
@@ -136,8 +126,6 @@ td {
 	}
 
 .dataCell {
-	font-family:Verdana,Arial,Helvetica,sans-serif;
-	font-size:10pt;
 	vertical-align: top;
 	padding-left: 7px;
 	padding-right: 7px;
@@ -147,7 +135,6 @@ td {
 	}
 
 .dataRow {
-	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 10pt;
 	cursor: pointer;
 	color: white;
@@ -160,8 +147,6 @@ td {
 
 
 .formPrompt {
-	font-family:Verdana,Arial,Helvetica,sans-serif;
-	font-size:10pt;
 	color: white;
 	text-align: right;
 	}
@@ -171,7 +156,6 @@ td {
 	position: absolute;
 	left: 10px;
 	top: 20px;
-	font-family:Verdana,Arial,Helvetica,sans-serif;
 	font-size:16pt;
 	width: 95%;
 	background: #ffd0d0;
