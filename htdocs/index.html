@@ -2789,8 +2789,9 @@ function keyEsc(e) {
 
 <div id=addZone style="display: none;">
 	<form method=post action="/" name=newZoneForm onSubmit="return doNewZone();">
-	<table width=40%><tbody id="startBody">
+	<table width=40%>
 	<colgroup><col width=35%/><col width=65%/></colgroup>
+	<tbody id="startBody">
 	<tr><td colspan=2><h2>Add a New Zone</h2></td></tr>
 		<tr><td class=formPrompt>Name :</td><td><input onkeydown="keyEsc(event);" name=zoneName></td></tr>
 		<tr><td class=formPrompt>Type :</td><td><select onChange="zoneKindChange(this);" name=zoneKind><option>Master<option>Slave<option>Native</select></td></tr>
