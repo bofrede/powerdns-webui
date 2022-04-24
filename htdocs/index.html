@@ -83,7 +83,7 @@ form {
 	margin: 0;
 	}
 
-.myBtn {
+button {
 	text-align: center;
 	display: inline-block;
 	background-color: #d0d0ff;
@@ -91,22 +91,18 @@ form {
 	font-size: 10pt;
 	font-weight: bold;
 	border-radius: 25px;
-	padding: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 5px 10px 5px 10px;
 	cursor: pointer;
-	margin-top: 0;
-	margin-left: 10px;
-	margin-bottom: 2px;
-	margin-right: 2px;
+	margin: 0 12px 2px 0;
+	border: 0;
 	}
 
-.myBtn:hover {
+button:hover {
 	box-shadow: 3px 3px #222244;
 	text-shadow: 1px 1px #ffffff;
 	}
 
-.myBtn:active {
+button:active {
 	position: relative;
 	box-shadow: none;
 	text-shadow: none;
@@ -765,13 +761,12 @@ function clickAddMeta(item,val,dataIdx,itemIdx)
 
 	x += '<tr><td colspan=2><hr></td></tr>'
 		+ '<tr><td colspan=2>'
-		+ '<span class=myBtn title="Cancel adding Metadata" onClick="zoneMeta();">Cancel</span>'
+		+ '<button type="button" title="Cancel adding Metadata" onclick="zoneMeta();">Cancel</button>'
 
 	if (showDelete(item,val))
-		x += '<span title="Delete this Metadata Item" class=myBtn onClick="doEditMeta(true);">Delete</span>'
+		x += '<button type="button" title="Delete this Metadata Item" onclick="doEditMeta(true);">Delete</button>'
 
-	x += `<span title="Add this Metadata Record" class=myBtn onClick="${formCall}">${addBtn}</span></td></tr>`
-		+ '<input type=submit style="display: none;">'
+	x += `<button type="button" title="Add this Metadata Record" onclick="${formCall}">${addBtn}</button></td></tr>`
 		+ '</table></form>';
 
 	gbl.bot.innerHTML = x;
@@ -2481,7 +2476,7 @@ function validInt(x) {
 function btn(call,txt,hlp,sz) {
 	let ex=""
 	if (sz != null) ex = `style='width: ${sz}px;'`
-	return `<span ${ex} title="${hlp}" class=myBtn onClick="${call}; return false;">${txt}</span>`;
+	return `<button type="button" ${ex} title="${hlp}" onclick="${call}; return false;">${txt}</button>`;
 }
 
 
@@ -2778,11 +2773,10 @@ function keyEsc(e) {
 		<tr><td class=formPrompt>API-Key:</td><td><input autocomplete="current-password" type=password size=40 name=apikey value=""></td></tr>
 		<tr><td class=formPrompt>HTTPS (SSL/TLS):</td><td><input title="Connect to API over HTTPS, not HTTP" type=checkbox name=with_https></td></tr>
 		<tr><td class=formPrompt>Fast Zone List:</td><td><input title="Fast load long zone lists by excluding some information" type=checkbox name=fast_zone_list></td></tr>
-		<tr><td colspan=2><span title="Load zone list" class=myBtn onClick="initialLogin()">Load Zone List</span></td></tr>
+		<tr><td></td><td><button type="button" title="Load zone list" onclick="initialLogin()">Load Zone List</button></td></tr>
 	</table>
-	<input type=submit style="display: none;">
 	</form>
-<div class='fullvis' id="lowerMsg"></div>
+	<div class='fullvis' id="lowerMsg"></div>
 </div>
 
 
@@ -2809,9 +2803,8 @@ function keyEsc(e) {
 				<input size=40 name=ip3><br></td></tr>
 		</tbody>
 		<tr><td colspan=2><hr></td></tr>
-		<tr><td colspan=2><span title="Cancel adding zone" class=myBtn onClick="zoneList();">Cancel</span><span title="Add new zone" class=myBtn onClick="doNewZone();">Add Zone</span></td></tr>
+		<tr><td></td><td><button type="button" title="Cancel adding zone" onclick="zoneList();">Cancel</button><button type="button" title="Add new zone" onclick="doNewZone();">Add Zone</button></td></tr>
 	</table>
-	<input type=submit style="display: none;">
 	</form>
 </div>
 
@@ -2841,9 +2834,8 @@ function keyEsc(e) {
 		</select></td></tr>
 		<tr><td class=formPrompt>TTL:</td><td><input value=86400 name=rrTTL></td></tr>
 		<tr><td colspan=2><hr></td></tr>
-		<tr><td colspan=2><span class=myBtn title="Cancel adding RR" onClick="loadThisZone();">Cancel</span><span title="Add this RR" class=myBtn onClick="doNewName();">Add Record</span></td></tr>
+		<tr><td></td><td><button type="button" title="Cancel adding RR" onclick="loadThisZone();">Cancel</button><button type="button" title="Add this RR" onclick="doNewName();">Add Record</button></td></tr>
 	</table>
-	<input type=submit style="display: none;">
 	</form>
 </div>
 
@@ -2860,9 +2852,8 @@ function keyEsc(e) {
 		</select></td></tr>
 		<tr><td class=formPrompt>TSIG Key: </td><td><input placeholder='Leave blank, for auto-generated key' size=100 name=tsigKey></td></tr>
 		<tr><td colspan=2><hr></td></tr>
-		<tr><td colspan=2><span class=myBtn title="Cancel adding a TSIG Key" onClick="loadTsigList();">Cancel</span><span title="Add this TSIG Key" class=myBtn onClick="formAddTsig();">Add TSIG</span></td></tr>
+		<tr><td></td><td><button type="button" title="Cancel adding a TSIG Key" onclick="loadTsigList();">Cancel</button><button type="button" title="Add this TSIG Key" onclick="formAddTsig();">Add TSIG</button></td></tr>
 	</table>
-	<input type=submit style="display: none;">
 	</form>
 </div>
 
