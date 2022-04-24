@@ -11,14 +11,39 @@
 
 <style>
 body, td, th, input, select, textarea, button {
-	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10pt;
 }
+
+html, body {
+	color: white;
+	margin-top: 0;
+	background-color: #666688;
+	scrollbar-base-color: #666699;
+	scrollbar-arrow-color: #ddddff;
+	}
+
+body > * {
+	max-width: 50em;
+	margin: 0 auto;
+}
+
+table {
+	margin: 0 auto;
+}
+
+#addZone,
+#asSlave,
+#addName,
+#addTsig {
+	display: none;
+}
+
 .fullvis { font-size:14pt; visibility: visible; opacity: 1; text-align: center; }
 .fadein  { font-size:14pt; visibility: visible; opacity: 1; transition: opacity 0.5s linear; }
 .fadeout { font-size:14pt; visibility: hidden; opacity: 0; transition: visibility 0s 1s, opacity 1s linear; }
 
-#topSpan{
+h1 {
 	background-color: #666688;
 	height: 55px;
 	line-height: 55px;
@@ -28,14 +53,12 @@ body, td, th, input, select, textarea, button {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0;
+	text-align: center;
 	}
 
-html {
-	color: white;
-	background-color: #666688;
-	scrollbar-base-color: #666699;
-	scrollbar-arrow-color: #ddddff;
-	}
+h2 {
+	text-align: center;
+}
 
 th {
 	color: black;
@@ -60,15 +83,6 @@ input {
 	color: black;
 	background-color: #ffd0d0;
 	}
-
-body {
-	color: white;
-	margin-top: 0;
-	background-color: #666688;
-	scrollbar-base-color: #666699;
-	scrollbar-arrow-color: #ddddff;
-	}
-
 
 a {
 	color: #b0b0ff;
@@ -177,7 +191,7 @@ td {
 
 <script>
 
-console.clear();
+// console.clear();
 
 var gbl = {
 	server: null,
@@ -730,7 +744,7 @@ function clickAddMeta(item,val,dataIdx,itemIdx)
 	if (itemIdx != null) x += `<input type=hidden name=itemIdx value=${itemIdx}>`
 
 	x += '<table width=40%>'
-	x += '<colgroup><col width=35%/><col width=65%/></colgroup>';
+	x += '<colgroup><col width=35%><col width=65%></colgroup>';
 	let addBtn = "Change";
 
 	if (val == null) {
@@ -746,7 +760,7 @@ function clickAddMeta(item,val,dataIdx,itemIdx)
 			+ `<input type=hidden name=metaItem value="${item}">`;
 		}
 
-	x += '<tr><Td class=formPrompt>Value: </td><td>';
+	x += '<tr><td class=formPrompt>Value: </td><td>';
 
 	if (item in metaPickLists) {
 		x += "<select name=metaValue>";
@@ -1174,7 +1188,7 @@ function drawOneRecord(rrs)
 	setState(`${x}/${ctx.rec.type}`, { state: "record", server: gbl.server, zone: ctx.zone, name:ctx.rec.name, type: ctx.rec.type });
 
 	x = "<table width=100%>";
-	x += '<colgroup><col width="10%" /><col width="25%" /><col width="99" /><col /><col width="75%" /></colgroup>'
+	x += '<colgroup><col width="10%"><col width="25%"><col width="99"><col><col width="75%"></colgroup>'
 	for(let idx in ctx.rec.rrs.records) {
 		let i = ctx.rec.rrs.records[idx];
 		x += "<tr class=dataRow>"
@@ -1256,23 +1270,23 @@ function addAlg(formName)
 	]
 	let keyLens = ["1024","2048","4096"];
 
-	let x = `<tr><Td class=formPrompt>Key Algrythm :</td><td><select onChange='showHideBits("${formName}");' name=keyAlg>`;
+	let x = `<tr><td class=formPrompt>Key Algrythm :</td><td><select onChange='showHideBits("${formName}");' name=keyAlg>`;
 	keyAlg.forEach(i => { x += `<option value=${i}>${i.toUpperCase()}` } );
 	x += "</select></td></tr>";
 
 	let txt = "CSK";
 	if (formName=="addKeyForm") txt = "Key";
 	x += "<tbody style='display:none;' id='key1Lens'>"
-		+ `<tr><Td class=formPrompt>${txt} Length (bits) :</td><td><select name=cskBits>`;
+		+ `<tr><td class=formPrompt>${txt} Length (bits) :</td><td><select name=cskBits>`;
 	keyLens.forEach(i => { x += `<option>${i}`; });
 	x += "</select></td></tr></tbody>";
 
 	x += "<tbody style='display:none;' id='key2Lens'>"
-	x += "<tr><Td class=formPrompt>KSK Length (bits) :</td><td><select name=kskBits>";
+	x += "<tr><td class=formPrompt>KSK Length (bits) :</td><td><select name=kskBits>";
 	keyLens.forEach(i => { x += `<option>${i}`; });
 	x += "</select></td></tr>";
 
-	x += "<tr><Td class=formPrompt>ZSK Length (bits) :</td><td><select name=zskBits>";
+	x += "<tr><td class=formPrompt>ZSK Length (bits) :</td><td><select name=zskBits>";
 	keyLens.forEach(i => { x += `<option>${i}`; });
 	x += "</select></td></tr></tbody>";
 
@@ -1392,11 +1406,11 @@ function signZone()
 
 	x += "</table>";
 
-	x += "<P style='height: 25px;'>&nbsp;</p><table cellspacing=20>"
-		+ "<tr><Td colspan=2>Your friendly paper-clip helper buddy says ....</td></tr>"
+	x += "<p style='height: 25px;'>&nbsp;</p><table cellspacing=20>"
+		+ "<tr><td colspan=2>Your friendly paper-clip helper buddy says ....</td></tr>"
 		+ `<tr><td><span style='font-size: 65pt'>${gbl.clip}</span></td><td>`
-		+ "<P>Unless you have a really good reason, you should probably sign your zone using <b>ECDSA256</b><P>"
-		+ "<b>NSEC</b> is more space & bandwidth efficient than <b>NSEC3</b>.<br><b>NSEC3</b> will enlarge your zone by typically twice as much as <b>NSEC</b>, but <b>NSEC</b> exposes all your DNS names in a linked list.<P>"
+		+ "<p>Unless you have a really good reason, you should probably sign your zone using <b>ECDSA256</b></p>"
+		+ "<b>NSEC</b> is more space & bandwidth efficient than <b>NSEC3</b>.<br><b>NSEC3</b> will enlarge your zone by typically twice as much as <b>NSEC</b>, but <b>NSEC</b> exposes all your DNS names in a linked list.</p>"
 		+ "<b>CSK</b> uses one key instead of two, but means your zone will double in size during key rollover.<br>With <b>KSK+ZSK</b> you have two keys to roll-over, but you can keep the same zone size during the process."
 		+ "</td></tr></table>"
 
@@ -1448,13 +1462,13 @@ function clickAddKey()
 	let x = "<form onSubmit='return doAddKey();' name=addKeyForm><table>"
 		+ "<tr><td><div style='height: 15px;'></div></td></tr>"
 		+ "<tr><th colspan=2>Add a DNSSEC Key</th></tr>"
-		+ "<tr><Td class=formPrompt>Key Type :</td><td><select name=keyKind>";
+		+ "<tr><td class=formPrompt>Key Type :</td><td><select name=keyKind>";
 
 	["ksk","zsk","csk"].forEach(i => { x += `<option value=${i}>${i.toUpperCase()}` } );
 
 	x += `</select></td></tr>${addAlg("addKeyForm")}`;
 
-	x += "<tr><Td class=formPrompt>Key Active :</td><td><select name=keyActive>";
+	x += "<tr><td class=formPrompt>Key Active :</td><td><select name=keyActive>";
 	["true","false"].forEach(i => { x += `<option>${i}`; });
 	x += "</select></td></tr>";
 
@@ -1721,8 +1735,8 @@ function showKeys(data)
 			let cid1 = keyTypes.csk.ids[keyTypes.csk.ids.length-1].idx;
 
 			let csk_rollover = [
-				`<tr><td>Step 1 of 2: </td><Td>${btn(`startCSK(${cid0})`,"Start CSK Rollover","Start a CSK Rollover",sz)}</td></tr>`,
-				`<tr><td>Step 2 of 2: </td><Td>${btn(`deleteKey(${cid1})`,"Complete CSK Rollover","Complete a CSK Rollover",sz)}</td></tr>`,
+				`<tr><td>Step 1 of 2: </td><td>${btn(`startCSK(${cid0})`,"Start CSK Rollover","Start a CSK Rollover",sz)}</td></tr>`,
+				`<tr><td>Step 2 of 2: </td><td>${btn(`deleteKey(${cid1})`,"Complete CSK Rollover","Complete a CSK Rollover",sz)}</td></tr>`,
 				]
 
 			if (keyTypes.csk.num == 1) key_txt = csk_rollover[0];
@@ -1747,21 +1761,21 @@ function showKeys(data)
 			let zid1 = keyTypes.zsk.ids[keyTypes.zsk.ids.length-1].idx;
 
 			let ksk_rollover = [
-				`<tr><td>${ksk_link}Step 1 of 2</a>: </td><Td>`
+				`<tr><td>${ksk_link}Step 1 of 2</a>: </td><td>`
 					+ btn(`startKSK(${kid0})`,"Start KSK Rollover","Start a KSK Rollover",sz) + "</td></tr>",
 
-				`<tr><td>${ksk_link}Step 2 of 2</a>: </td><Td>`
+				`<tr><td>${ksk_link}Step 2 of 2</a>: </td><td>`
 						 + btn(`deleteKey(${kid1})`,"Complete KSK Rollover","Complete the KSK Rollover",sz) + "</td></tr>",
 				];
 
 			let zsk_rollover = [
-				`<tr><td>${zsk_link}Step 1 of 3</a>: </td><Td>`
+				`<tr><td>${zsk_link}Step 1 of 3</a>: </td><td>`
 					 + btn(`startZSK(${zid0})`,"Start ZSK Rollover","Start a ZSK Rollover",sz) + "</td></tr>",
 
-				`<tr><td>${zsk_link}Step 2 of 3</a>: </td><Td>`
+				`<tr><td>${zsk_link}Step 2 of 3</a>: </td><td>`
 					+ btn(`activateZSK(${zid0},${zid1})`,"Activate ZSK Rollover","Activate the ZSK Rollover",sz) + "</td></tr>",
 
-				`<tr><td>${zsk_link}Step 3 of 3</a>: </td><Td>`
+				`<tr><td>${zsk_link}Step 3 of 3</a>: </td><td>`
 					+ btn(`deleteKey(${zid1})`,"Complete ZSK Rollover","Complete the ZSK Rollover",sz) + "</td></tr>",
 				];
 
@@ -2284,7 +2298,7 @@ function showTsigList(data)
 	ctx = {}; topLine();
 
 	let x = "<table width=100%>"
-		+ "<colgroup><col width=100%/><col/></colgroup><tr><Td>"
+		+ "<colgroup><col width=100%><col></colgroup><tr><td>"
 		+ "<table cellspacing=2 cellpadding=2>"
 		+ "<tr><th>TSIG Name</td><th>Algorithm</td></tr>";
 
@@ -2397,7 +2411,7 @@ function zoneListDetails(data)
 
 	setState(`${gbl.server}: Zone List`, { state: "zonelist", server: gbl.server });
 
-	let x = "<table width=100%><colgroup><col width=100%/><col/></colgroup>"
+	let x = "<table width=100%><colgroup><col width=100%><col></colgroup>"
 	x += "<tr><td><table width=100%>";
 	for(let i of data) {
 		x += `<tr class=dataRow onClick='zoneDetailsLoad("${i.name}")'>`
@@ -2557,7 +2571,7 @@ function topLine()
 			x += btn("loadStats()","Stats","View the server stats");
 		}
 
-	x += "</td><td width=1 align=right><form name=searchForm onSubmit='return searchFormSubmit();'>"
+	x += "</td><td width=1 align=right><form name=searchForm onsubmit='return searchFormSubmit();'>"
 		+ "<input placeholder='Search' size=30 name=searchTerm></form></td>"
 		+ "</tr><table><hr>";
 
@@ -2757,106 +2771,151 @@ function keyEsc(e) {
 </script>
 </head>
 
-<body onLoad="startUp();">
+<body onload="startUp();">
 
-<div id="topSpan">
-<table width=100%>
-<tr><td><h1 style="text-align:center">PowerDNS WebUI</h1></td></tr>
-</table>
-</div>
+<h1>PowerDNS WebUI</h1>
 
 <div id="lowerSpan">
-
-	<form action="/" onSubmit="return initialLogin()" name=loginForm>
-	<table>
-		<tr><td class=formPrompt>Server:</td><td><input title="PowerDNS RestAPI, can include optional :[port] and sub-directory" name=server size=40 value=""></td></tr>
-		<tr><td class=formPrompt>API-Key:</td><td><input autocomplete="current-password" type=password size=40 name=apikey value=""></td></tr>
-		<tr><td class=formPrompt>HTTPS (SSL/TLS):</td><td><input title="Connect to API over HTTPS, not HTTP" type=checkbox name=with_https></td></tr>
-		<tr><td class=formPrompt>Fast Zone List:</td><td><input title="Fast load long zone lists by excluding some information" type=checkbox name=fast_zone_list></td></tr>
-		<tr><td></td><td><button type="button" title="Load zone list" onclick="initialLogin()">Load Zone List</button></td></tr>
-	</table>
+	<form action="/" onsubmit="return initialLogin()" name="loginForm">
+		<table>
+			<tr><td class="formPrompt">Server:</td><td><input title="PowerDNS RestAPI, can include optional :[port] and sub-directory" name="server" size="40" value=""></td></tr>
+			<tr><td class="formPrompt">API-Key:</td><td><input autocomplete="current-password" type="password" size="40" name="apikey" value=""></td></tr>
+			<tr><td class="formPrompt">HTTPS (SSL/TLS):</td><td><input title="Connect to API over HTTPS, not HTTP" type="checkbox" name="with_https"></td></tr>
+			<tr><td class="formPrompt">Fast Zone List:</td><td><input title="Fast load long zone lists by excluding some information" type="checkbox" name="fast_zone_list"></td></tr>
+			<tr><td></td><td><button type="button" title="Load zone list" onclick="initialLogin()">Load Zone List</button></td></tr>
+		</table>
 	</form>
-	<div class='fullvis' id="lowerMsg"></div>
+	<div class="fullvis" id="lowerMsg"></div>
 </div>
 
 
-
-<div id=addZone style="display: none;">
-	<form method=post action="/" name=newZoneForm onSubmit="return doNewZone();">
-	<table width=40%>
-	<colgroup><col width=35%/><col width=65%/></colgroup>
-	<tbody id="startBody">
-	<tr><td colspan=2><h2>Add a New Zone</h2></td></tr>
-		<tr><td class=formPrompt>Name :</td><td><input onkeydown="keyEsc(event);" name=zoneName></td></tr>
-		<tr><td class=formPrompt>Type :</td><td><select onChange="zoneKindChange(this);" name=zoneKind><option>Master<option>Slave<option>Native</select></td></tr>
-		</tbody><tbody id="asMaster">
-			<tr><td class=formPrompt>Name Servers :</td><td>
-				<input size=40 name=ns0><br>
-				<input size=40 name=ns1><br>
-				<input size=40 name=ns2><br>
-				<input size=40 name=ns3><br></td></tr>
-		</tbody><tbody id="asSlave" style="display: none;">
-			<tr><td class=formPrompt>Master's IPs :</td><td>
-				<input size=40 name=ip0><br>
-				<input size=40 name=ip1><br>
-				<input size=40 name=ip2><br>
-				<input size=40 name=ip3><br></td></tr>
-		</tbody>
-		<tr><td colspan=2><hr></td></tr>
-		<tr><td></td><td><button type="button" title="Cancel adding zone" onclick="zoneList();">Cancel</button><button type="button" title="Add new zone" onclick="doNewZone();">Add Zone</button></td></tr>
-	</table>
-	</form>
-</div>
-
-
-
-<div id=addName style="display: none;">
-	<form method=post action="/" name=newNameForm onSubmit="return doNewName();">
-	<table width=40%>
-	<colgroup><col width=35%/><col width=65%/></colgroup>
-	<tr><td colspan=2><h2>Add a New Host</h2></td></tr>
-		<tr><td class=formPrompt>Host name:</td><td><input onkeydown="keyEsc(event);" name=rrName></td></tr>
-		<tr><td class=formPrompt>RR Type:</td><td><select name=rrType>
-			<option>A<option>AAAA<option>MX<option>NS<option>TXT
-			<option value=CATALOG>Add Zone to Catalog
-
-			<option>A6<option>ADDR<option>AFSDB<option>ALIAS
-			<option>CAA<option>CDNSKEY<option>CDS<option>CERT
-			<option>CNAME<option>DHCID<option>DLV<option>DNAME<option>DNSKEY<option>DS
-			<option>EUI48<option>EUI64<option>HINFO<option>IPSECKEY<option>KEY
-			<option>KX<option>LOC<option>LUA<option>MAILA<option>MAILB<option>MB
-			<option>MG<option>MINFO<option>MR<option>MX<option>NAPTR<option>NS
-			<option>OPENPGPKEY<option>OPT<option>PTR
-			<option>RKEY<option>RP<option>RRSIG<option>SIG<option>SMIMEA<option>SOA
-			<option>SPF<option>SRV<option>SSHFP<option>TKEY<option>TLSA<option>TXT
-			<option>URI<option>WKS
-
-		</select></td></tr>
-		<tr><td class=formPrompt>TTL:</td><td><input value=86400 name=rrTTL></td></tr>
-		<tr><td colspan=2><hr></td></tr>
-		<tr><td></td><td><button type="button" title="Cancel adding RR" onclick="loadThisZone();">Cancel</button><button type="button" title="Add this RR" onclick="doNewName();">Add Record</button></td></tr>
-	</table>
+<div id="addZone">
+	<form method="post" action="/" name="newZoneForm" onsubmit="return doNewZone();">
+		<h2>Add a New Zone</h2>
+		<table>
+		<colgroup><col width="35%"><col width="65%"></colgroup>
+		<tbody id="startBody">
+			<tr><td class="formPrompt">Name :</td><td><input onkeydown="keyEsc(event);" name="zoneName"></td></tr>
+			<tr><td class="formPrompt">Type :</td><td>
+				<select onchange="zoneKindChange(this);" name="zoneKind">
+					<option>Master</option>
+					<option>Slave</option>
+					<option>Native</option>
+				</select>
+			</td></tr>
+			</tbody>
+			<tbody id="asMaster">
+				<tr><td class="formPrompt">Name Servers :</td><td>
+					<input size="40" name="ns0"><br>
+					<input size="40" name="ns1"><br>
+					<input size="40" name="ns2"><br>
+					<input size="40" name="ns3"><br></td></tr>
+			</tbody>
+			<tbody id="asSlave">
+				<tr><td class="formPrompt">Master's IPs :</td><td>
+					<input size="40" name="ip0"><br>
+					<input size="40" name="ip1"><br>
+					<input size="40" name="ip2"><br>
+					<input size="40" name="ip3"><br></td></tr>
+			</tbody>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr><td></td><td><button type="button" title="Cancel adding zone" onclick="zoneList();">Cancel</button><button type="button" title="Add new zone" onclick="doNewZone();">Add Zone</button></td></tr>
+		</table>
 	</form>
 </div>
 
 
-<div id=addTsig style="display: none;">
-	<form method=post action="/" name=newTsigForm onSubmit="return formAddTsig();">
-	<table width=40%>
-	<colgroup><col width=35%/><col width=65%/></colgroup>
-	<tr><td colspan=2><h2>Add a New TSIG Key</h2></td></tr>
-		<tr><Td class=formPrompt>TSIG Name: </td><td><input size=50 name=tsigName></td></tr>
-		<tr><td class=formPrompt>TSIG Algrythm: </td><td><select name=tsigAlg>
-			<option value="hmac-sha512">HMAC-SHA512<option value="hmac-sha384">HMAC-SHA384<option value="hmac-sha256">HMAC-SHA256
-			<option value="hmac-sha224">HMAC-SHA224<option value="hmac-sha1">HMAC-SHA1<option value="hmac-md5">HMAC-MD5
-		</select></td></tr>
-		<tr><td class=formPrompt>TSIG Key: </td><td><input placeholder='Leave blank, for auto-generated key' size=100 name=tsigKey></td></tr>
-		<tr><td colspan=2><hr></td></tr>
-		<tr><td></td><td><button type="button" title="Cancel adding a TSIG Key" onclick="loadTsigList();">Cancel</button><button type="button" title="Add this TSIG Key" onclick="formAddTsig();">Add TSIG</button></td></tr>
-	</table>
+<div id="addName">
+	<form method="post" action="/" name=newNameForm onsubmit="return doNewName();">
+		<h2>Add a New Host</h2>
+		<table>
+		<colgroup><col width="35%"><col width="65%"></colgroup>
+			<tr><td class="formPrompt">Host name:</td><td><input onkeydown="keyEsc(event);" name="rrName"></td></tr>
+			<tr><td class="formPrompt">RR Type:</td><td><select name="rrType">
+				<option>A</option>
+				<option>AAAA</option>
+				<option>MX</option>
+				<option>NS</option>
+				<option>TXT</option>
+				<option value="CATALOG">Add Zone to Catalog</option>
+				<option>A6</option>
+				<option>ADDR</option>
+				<option>AFSDB</option>
+				<option>ALIAS</option>
+				<option>CAA</option>
+				<option>CDNSKEY</option>
+				<option>CDS</option>
+				<option>CERT</option>
+				<option>CNAME</option>
+				<option>DHCID</option>
+				<option>DLV</option>
+				<option>DNAME</option>
+				<option>DNSKEY</option>
+				<option>DS</option>
+				<option>EUI48</option>
+				<option>EUI64</option>
+				<option>HINFO</option>
+				<option>IPSECKEY</option>
+				<option>KEY</option>
+				<option>KX</option>
+				<option>LOC</option>
+				<option>LUA</option>
+				<option>MAILA</option>
+				<option>MAILB</option>
+				<option>MB</option>
+				<option>MG</option>
+				<option>MINFO</option>
+				<option>MR</option>
+				<option>MX</option>
+				<option>NAPTR</option>
+				<option>NS</option>
+				<option>OPENPGPKEY</option>
+				<option>OPT</option>
+				<option>PTR</option>
+				<option>RKEY</option>
+				<option>RP</option>
+				<option>RRSIG</option>
+				<option>SIG</option>
+				<option>SMIMEA</option>
+				<option>SOA</option>
+				<option>SPF</option>
+				<option>SRV</option>
+				<option>SSHFP</option>
+				<option>TKEY</option>
+				<option>TLSA</option>
+				<option>TXT</option>
+				<option>URI</option>
+				<option>WKS</option>
+			</select></td></tr>
+			<tr><td class="formPrompt">TTL:</td><td><input value="86400" name="rrTTL"></td></tr>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr><td></td><td><button type="button" title="Cancel adding RR" onclick="loadThisZone();">Cancel</button><button type="button" title="Add this RR" onclick="doNewName();">Add Record</button></td></tr>
+		</table>
 	</form>
 </div>
 
-<div id=myMsgPop class='msgPop msgPopNo'></div>
+
+<div id="addTsig">
+	<form method="post" action="/" name=newTsigForm onsubmit="return formAddTsig();">
+		<h2>Add a New TSIG Key</h2>
+		<table>
+			<colgroup><col width="35%"><col width="65%"></colgroup>
+			<tr><td class="formPrompt">TSIG Name: </td><td><input size="50" name="tsigName"></td></tr>
+			<tr><td class="formPrompt">TSIG Algrythm: </td><td><select name="tsigAlg">
+				<option value="hmac-sha512">HMAC-SHA512</option>
+				<option value="hmac-sha384">HMAC-SHA384</option>
+				<option value="hmac-sha256">HMAC-SHA256</option>
+				<option value="hmac-sha224">HMAC-SHA224</option>
+				<option value="hmac-sha1">HMAC-SHA1</option>
+				<option value="hmac-md5">HMAC-MD5</option>
+			</select></td></tr>
+			<tr><td class="formPrompt">TSIG Key: </td><td><input placeholder="Leave blank, for auto-generated key" size="100" name="tsigKey"></td></tr>
+			<tr><td colspan="2"><hr></td></tr>
+			<tr><td></td><td><button type="button" title="Cancel adding a TSIG Key" onclick="loadTsigList();">Cancel</button><button type="button" title="Add this TSIG Key" onclick="formAddTsig();">Add TSIG</button></td></tr>
+		</table>
+	</form>
+</div>
+
+<div id="myMsgPop" class="msgPop msgPopNo"></div>
 </body>
 </html>
