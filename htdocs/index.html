@@ -3,6 +3,7 @@
 <!-- Alternative license arrangements are possible, contact me for more information -->
 <html lang="en">
 <head>
+	<meta charset="utf-8">
 	<title>PowerDNS WebUI - Login</title>
 <script>
 	const debugAPI = false;
@@ -19,6 +20,8 @@ html, body {
 	color: white;
 	margin-top: 0;
 	background-color: #666688;
+	::-webkit-scrollbar: #666699;
+	::-webkit-scrollbar-thumb: #ffffff80;
 	scrollbar-color: #ffffff80 #666699;
 	}
 
@@ -2489,7 +2492,7 @@ function validInt(x) {
 function btn(call,txt,hlp,sz) {
 	let ex=""
 	if (sz != null) ex = `style='width: ${sz}px;'`
-	return `<button type="button" ${ex} title="${hlp}" onclick="${call}; return false;">${txt}</button>`;
+	return `<button type="button" ${ex} title="${hlp}" onclick="${call};">${txt}</button>`;
 }
 
 
@@ -2772,7 +2775,7 @@ function keyEsc(e) {
 
 <body onload="startUp();">
 
-<h1>PowerDNS WebUI</h1>
+<div id="topSpan"><h1>PowerDNS WebUI</h1></div>
 
 <div id="lowerSpan">
 	<form action="/" onsubmit="return initialLogin()" name="loginForm">
