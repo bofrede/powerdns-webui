@@ -1,70 +1,46 @@
-<!DOCTYPE html>
-<!-- (c) Copyright 2019-2021, James Stevens ... see LICENSE for details -->
-<!-- Alternative license arrangements are possible, contact me for more information -->
-<html lang="en">
+<!--- (c) Copyright 2019-2021, James Stevens ... see LICENSE for details --->
+<!--- Alternative license arrangements are possible, contact me for more information --->
+<html>
 <head>
-	<meta charset="utf-8">
 	<title>PowerDNS WebUI - Login</title>
-<script>
+</head>
+<script language="Javascript">
 	const debugAPI = false;
 </script>
 
 
-<style>
-body, td, th, input, select, textarea, button {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10pt;
-}
+<style type='text/css'>
 
-html, body {
-	color: white;
-	margin-top: 0;
-	background-color: #666688;
-	::-webkit-scrollbar: #666699;
-	::-webkit-scrollbar-thumb: #ffffff80;
-	scrollbar-color: #ffffff80 #666699;
-	}
+.fullvis { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14pt; visibility: visible; opacity: 1; text-align: center; }
+.fadein  { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14pt; visibility: visible; opacity: 1; transition: opacity 0.5s linear; }
+.fadeout { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14pt; visibility: hidden; opacity: 0; transition: visibility 0s 1s, opacity 1s linear; }
 
-body > * {
-	max-width: 50em;
-	margin: 0 auto;
-}
-
-table {
-	margin: 0 auto;
-}
-
-#addZone,
-#asSlave,
-#addName,
-#addTsig {
-	display: none;
-}
-
-.fullvis { font-size:14pt; visibility: visible; opacity: 1; text-align: center; }
-.fadein  { font-size:14pt; visibility: visible; opacity: 1; transition: opacity 0.5s linear; }
-.fadeout { font-size:14pt; visibility: hidden; opacity: 0; transition: visibility 0s 1s, opacity 1s linear; }
-
-h1 {
+#topSpan{
 	background-color: #666688;
 	height: 55px;
 	line-height: 55px;
-	margin-top: 0;
-	padding-left: 0;
+	margin-top: 0px;
+	padding-left: 0px;
 	padding-top: 1px;
 	position: -webkit-sticky;
 	position: sticky;
-	top: 0;
-	text-align: center;
+	top: 0px;
 	}
 
-h2 {
-	text-align: center;
-}
+html {
+	color: white;
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:10pt;
+	background-color:#666688;
+	scrollbar-base-color:#666699;
+	scrollbar-arrow-color:#ddddff;
+	}
 
 th {
 	color: black;
-	background-color: #a0a0cc;
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:10pt;
+	background-color:#a0a0cc;
 	font-weight: bold;
 	padding-left: 6px;
 	padding-right: 6px;
@@ -72,23 +48,38 @@ th {
 
 select {
 	color: black;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 8pt;
 	}
 
 input {
 	color: black;
 	background-color: white;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 8pt;
 	}
 
 .inputBad {
 	color: black;
 	background-color: #ffd0d0;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 8pt;
 	}
+
+body {
+	color: white;
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:10pt;
+	margin-top: 0px;
+	background-color:#666688;
+	scrollbar-base-color:#666699;
+	scrollbar-arrow-color:#ddddff;
+	}
+
 
 a {
 	color: #b0b0ff;
-	text-decoration: none;
+	text-decoration:none;
 	}
 
 a:hover {
@@ -96,29 +87,34 @@ a:hover {
 	}
 
 form {
-	margin: 0;
+	margin:0px;
 	}
 
-button {
+.myBtn {
 	text-align: center;
 	display: inline-block;
 	background-color: #d0d0ff;
 	color: black;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 10pt;
 	font-weight: bold;
 	border-radius: 25px;
-	padding: 5px 10px 5px 10px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 	cursor: pointer;
-	margin: 0 12px 2px 0;
-	border: 0;
+	margin-top: 0px;
+	margin-left: 10px;
+	margin-bottom: 2px;
+	margin-right: 2px;
 	}
 
-button:hover {
+.myBtn:hover {
 	box-shadow: 3px 3px #222244;
 	text-shadow: 1px 1px #ffffff;
 	}
 
-button:active {
+.myBtn:active {
 	position: relative;
 	box-shadow: none;
 	text-shadow: none;
@@ -131,6 +127,8 @@ button:active {
 	}
 
 td {
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:10pt;
 	vertical-align: top;
 	padding-left: 7px;
 	padding-right: 7px;
@@ -138,6 +136,8 @@ td {
 	}
 
 .dataCell {
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:10pt;
 	vertical-align: top;
 	padding-left: 7px;
 	padding-right: 7px;
@@ -147,6 +147,7 @@ td {
 	}
 
 .dataRow {
+	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size: 10pt;
 	cursor: pointer;
 	color: white;
@@ -159,6 +160,8 @@ td {
 
 
 .formPrompt {
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:10pt;
 	color: white;
 	text-align: right;
 	}
@@ -168,7 +171,8 @@ td {
 	position: absolute;
 	left: 10px;
 	top: 20px;
-	font-size: 16pt;
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:16pt;
 	width: 95%;
 	background: #ffd0d0;
 	text-align: center;
@@ -179,21 +183,19 @@ td {
 
 .msgPopNo {
 	visibility: hidden;
-	opacity: 0;
-	transition: visibility 0s 1s, opacity 1s linear;
+	opacity: 0; transition: visibility 0s 1s, opacity 1s linear;
 	}
 
 .msgPopYes {
 	visibility: visible;
-	opacity: 1;
-	transition: opacity 0.5s linear;
+	opacity: 1; transition: opacity 0.5s linear;
 	}
 
 </style>
 
-<script>
+<script language="Javascript">
 
-// console.clear();
+console.clear();
 
 var gbl = {
 	server: null,
@@ -259,7 +261,6 @@ const validateMeta = {
 	"SOA-EDIT": /^(INCREMENT-WEEKS|INCEPTION-EPOCH|INCEPTION-INCREMENT|INCEPTION)$/i,
 	"SOA-EDIT-API": /^(DEFAULT|INCREASE|EPOCH|SOA-EDIT|SOA-EDIT-INCREASE)$/i,
 	"SOA-EDIT-DNSUPDATE": /^(DEFAULT|INCREASE|EPOCH|SOA-EDIT|SOA-EDIT-INCREASE)$/i,
-	"KIND": /^(Master|Slave|Native)$/i,
 	};
 
 
@@ -274,17 +275,16 @@ const metaPickLists = {
 	"PRESIGNED" : { "Enabled":1, "Disabled":0 },
 	"NSEC3NARROW" : { "Enabled":1, "Disabled":0 },
 	"IXFR" : { "Enabled":1, "Disabled":0 },
-	"SLAVE-RENOTIFY" : { "Enabled":1, "Disabled":0 },
+	"eSLAVE-RENOTIFY" : { "Enabled":1, "Disabled":0 },
 	"SOA-EDIT" : [ "INCREMENT-WEEKS","INCEPTION-EPOCH","INCEPTION-INCREMENT","INCEPTION" ],
 	"SOA-EDIT-API": [ "DEFAULT","INCREASE","EPOCH","SOA-EDIT","SOA-EDIT-INCREASE" ],
 	"SOA-EDIT-DNSUPDATE": [ "DEFAULT","INCREASE","EPOCH","SOA-EDIT","SOA-EDIT-INCREASE" ],
-	"KIND": [ "Master", "Slave", "Native" ],
 	};
 
 
 // these appear as metadata items but are handled as zone properties - lol
 const blockedMeta = {
-	"KIND": { name: "kind", list: false, delete: false },
+	"SOA-EDIT": { name: "soa_edit", list: false, delete: false },
 	"SOA-EDIT-API": { name: "soa_edit_api", list: false, delete: true },
 	"NSEC3PARAM": { name: "nsec3param", list: false, delete: true },
 	"TSIG-ALLOW-AXFR": { name: "master_tsig_key_ids", list: true, delete: true },
@@ -303,7 +303,6 @@ const allMetaItems = [
 	'GSS-ACCEPTOR-PRINCIPAL',
 	'GSS-ALLOW-AXFR-PRINCIPAL',
 	'IXFR',
-	'KIND',
 	'LUA-AXFR-SCRIPT',
 	'NOTIFY-DNSUPDATE',
 	'NSEC3NARROW',
@@ -580,7 +579,7 @@ function showOneStats(data)
 	ctx.stats = data;
 	setState(`${gbl.server}: Stats: ${item.name}`, { state: "stats", server: gbl.server, stats: item.name });
 
-	let x = "<table width=100%><tr>";
+	let x = "<table width=100% border=0 cellspacing=1 cellpadding=0><tr>";
 	for (let i in item.value[0]) x += `<th>${i}</th>`;
 	x += "</tr>";
 
@@ -617,7 +616,7 @@ function showStats(data)
 
 	setState(`${gbl.server}: Stats`, { state: "stats", server: gbl.server });
 
-	let x = "<table width=100%>";
+	let x = "<table width=100% border=0 cellspacing=1 cellpadding=0>";
 	data.forEach(i => {
 		let clk=`onClick="oneStat('${i.name}');"`;
 		if (typeof(i.value) != "object") clk="";
@@ -673,17 +672,7 @@ function doEditMeta(isDel)
 		json[blockedMeta[i.kind].name] = metaValue;
 		if (blockedMeta[i.kind].list) json[blockedMeta[i.kind].name] = i.metadata;
 
-		nxtFn = zoneMeta;
-		if (i.kind == "KIND") {
-			nxtFn = function(res) {
-				callApi(`zones/${ctx.zone}`, (data) => {
-					ctx.zoneDetails = data;
-					zoneMeta();
-					} );
-				};
-			}
-
-		callApi(`zones/${ctx.zone}`, nxtFn, { method: "PUT", okResp: 204, json: JSON.stringify(json) } );
+		callApi(`zones/${ctx.zone}`, zoneMeta, { method: "PUT", okResp: 204, json: JSON.stringify(json) } );
 		}
 	else {
 		let hdr = { method: "PUT", okResp: 200, json: JSON.stringify({ metadata: i.metadata }) };
@@ -761,24 +750,24 @@ function clickAddMeta(item,val,dataIdx,itemIdx)
 	if (dataIdx != null) x += `<input type=hidden name=dataIdx value=${dataIdx}>`
 	if (itemIdx != null) x += `<input type=hidden name=itemIdx value=${itemIdx}>`
 
-	x += '<table width=40%>'
-	x += '<colgroup><col width=35%><col width=65%></colgroup>';
+	x += '<table width=40% align=center>'
+	x += '<colgroup><col width=35%/><col width=65%/></colgroup>';
 	let addBtn = "Change";
 
 	if (val == null) {
 		addBtn = "Add Metadata";
-		x += "<tr><td colspan=2><h2>Add a New Metadata Item</h2></td></tr>"
+		x += "<tr><td colspan=2 align=center><h2>Add a New Metadata Item</h2></td></tr>"
 			+ "<tr><td class=formPrompt>Metadata: </td><td><select onChange='clickAddMeta(this.value.toUpperCase());' name=metaItem>";
 		allMetaItems.forEach(i => { c=""; if (i==item) c="selected"; x += `<option ${c}>${i}` });
 		x += '</select></td></tr>';
 		}
 	else {
-		x += `<tr><td colspan=2><h2>Edit a Metadata Item</h2></td></tr>`
+		x += `<tr><td colspan=2 align=center><h2>Edit a Metadata Item</h2></td></tr>`
 			+ `<tr><td class=formPrompt>Metadata Item: </td><td>${item}</td></tr>`
 			+ `<input type=hidden name=metaItem value="${item}">`;
 		}
 
-	x += '<tr><td class=formPrompt>Value: </td><td>';
+	x += '<tr><Td class=formPrompt>Value: </td><td>';
 
 	if (item in metaPickLists) {
 		x += "<select name=metaValue>";
@@ -792,13 +781,14 @@ function clickAddMeta(item,val,dataIdx,itemIdx)
 		x += `<input size=50 name=metaValue></td></tr>`;
 
 	x += '<tr><td colspan=2><hr></td></tr>'
-		+ '<tr><td colspan=2>'
-		+ '<button type="button" title="Cancel adding Metadata" onclick="zoneMeta();">Cancel</button>'
+		+ '<tr><td align=center colspan=2>'
+		+ '<span class=myBtn title="Cancel adding Metadata" onClick="zoneMeta();">Cancel</span>'
 
 	if (showDelete(item,val))
-		x += '<button type="button" title="Delete this Metadata Item" onclick="doEditMeta(true);">Delete</button>'
+		x += '<span title="Delete this Metadata Item" class=myBtn onClick="doEditMeta(true);">Delete</span>'
 
-	x += `<button type="button" title="Add this Metadata Record" onclick="${formCall}">${addBtn}</button></td></tr>`
+	x += `<span title="Add this Metadata Record" class=myBtn onClick="${formCall}">${addBtn}</span></td></tr>`
+		+ '<input type=submit style="display: none;">'
 		+ '</table></form>';
 
 	gbl.bot.innerHTML = x;
@@ -827,8 +817,6 @@ function zoneMeta()
 
 function zoneMetaDetails(data)
 {
-	data.push({"kind":"KIND","metadata":[ctx.zoneDetails.kind],"type":"metadata"});
-
 	data.sort((a,b) => {
 		if (a.kind < b.kind) return -1;
 		if (a.kind > b.kind) return 1;
@@ -846,7 +834,7 @@ function zoneMetaDetails(data)
 		{ state: "meta", server: gbl.server, zone: ctx.zone, meta:true });
 	ctx.zoneMeta = data;
 
-	let x = "<table width=60%>";
+	let x = "<table align=center width=60% border=0 cellspacing=1 cellpadding=0>";
 	for(let i in data) {
 		for(let y in data[i].metadata) {
 			let td = `<td onClick="editMetaItem(${i},${y});">`;
@@ -1207,12 +1195,12 @@ function drawOneRecord(rrs)
 
 	setState(`${x}/${ctx.rec.type}`, { state: "record", server: gbl.server, zone: ctx.zone, name:ctx.rec.name, type: ctx.rec.type });
 
-	x = "<table width=100%>";
-	x += '<colgroup><col width="10%"><col width="25%"><col width="99"><col><col width="75%"></colgroup>'
+	x = "<table width=100% border=0 cellspacing=1 cellpadding=0>";
+	x += '<colgroup><col width="10%" /><col width="25%" /><col width="99px" /><col /><col width="75%" /></colgroup>'
 	for(let idx in ctx.rec.rrs.records) {
 		let i = ctx.rec.rrs.records[idx];
 		x += "<tr class=dataRow>"
-			+ `<td onClick='deleteRRitem(${idx});'>${gbl.bin}</td>`
+			+ `<td onClick='deleteRRitem(${idx});' align=center>${gbl.bin}</td>`
 			+ `<td onClick='clickRecName(${idx});'><span id=nme${idx}>${ctx.rec.name}</span></td>`
 			+ `<td align=right onClick='clickTTL(${idx});'><span id=ttl${idx}>${ctx.rec.rrs.ttl}</span></td>`
 			+ `<td>${ctx.rec.rrs.type}</td>`
@@ -1290,23 +1278,23 @@ function addAlg(formName)
 	]
 	let keyLens = ["1024","2048","4096"];
 
-	let x = `<tr><td class=formPrompt>Key Algrythm :</td><td><select onChange='showHideBits("${formName}");' name=keyAlg>`;
+	let x = `<tr><Td class=formPrompt>Key Algrythm :</td><td><select onChange='showHideBits("${formName}");' name=keyAlg>`;
 	keyAlg.forEach(i => { x += `<option value=${i}>${i.toUpperCase()}` } );
 	x += "</select></td></tr>";
 
 	let txt = "CSK";
 	if (formName=="addKeyForm") txt = "Key";
 	x += "<tbody style='display:none;' id='key1Lens'>"
-		+ `<tr><td class=formPrompt>${txt} Length (bits) :</td><td><select name=cskBits>`;
+		+ `<tr><Td class=formPrompt>${txt} Length (bits) :</td><td><select name=cskBits>`;
 	keyLens.forEach(i => { x += `<option>${i}`; });
 	x += "</select></td></tr></tbody>";
 
 	x += "<tbody style='display:none;' id='key2Lens'>"
-	x += "<tr><td class=formPrompt>KSK Length (bits) :</td><td><select name=kskBits>";
+	x += "<tr><Td class=formPrompt>KSK Length (bits) :</td><td><select name=kskBits>";
 	keyLens.forEach(i => { x += `<option>${i}`; });
 	x += "</select></td></tr>";
 
-	x += "<tr><td class=formPrompt>ZSK Length (bits) :</td><td><select name=zskBits>";
+	x += "<tr><Td class=formPrompt>ZSK Length (bits) :</td><td><select name=zskBits>";
 	keyLens.forEach(i => { x += `<option>${i}`; });
 	x += "</select></td></tr></tbody>";
 
@@ -1403,7 +1391,7 @@ function doSignZone()
 
 function signZone()
 {
-	let x = "<form onSubmit='return doSignZone();' name=signZoneForm><table>";
+	let x = "<form onSubmit='return doSignZone();' name=signZoneForm><table align=center>";
 
 	x += "<tr><td><div style='height: 15px;'></div></td></tr>"
 		+ `<tr><th colspan=2>DNSSEC Sign: ${ctx.zone}</th></tr>`;
@@ -1418,7 +1406,7 @@ function signZone()
 	x += "</select></td></tr>";
 
 	x += "<tr><td><div style='height: 15px;'></div></td></tr>"
-		+ "<tr><td colspan=2>"
+		+ "<tr><td align=center colspan=2>"
 		+ btn("loadThisZone()","Cancel",`Do not sign ${ctx.zone}`)
 		+ btn("doSignZone()","Sign Zone",`DNSSEC Sign ${ctx.zone}`)
 		+ "</td></tr><tr><td><div style='height: 15px;'></div></td></tr>"
@@ -1426,11 +1414,11 @@ function signZone()
 
 	x += "</table>";
 
-	x += "<p style='height: 25px;'>&nbsp;</p><table cellspacing=20>"
-		+ "<tr><td colspan=2>Your friendly paper-clip helper buddy says ....</td></tr>"
+	x += "<P style='height: 25px;'>&nbsp;</p><table border=0 cellspacing=20 align=center>"
+		+ "<tr><Td colspan=2>Your friendly paper-clip helper buddy says ....</td></tr>"
 		+ `<tr><td><span style='font-size: 65pt'>${gbl.clip}</span></td><td>`
-		+ "<p>Unless you have a really good reason, you should probably sign your zone using <b>ECDSA256</b></p>"
-		+ "<b>NSEC</b> is more space & bandwidth efficient than <b>NSEC3</b>.<br><b>NSEC3</b> will enlarge your zone by typically twice as much as <b>NSEC</b>, but <b>NSEC</b> exposes all your DNS names in a linked list.</p>"
+		+ "<P>Unless you have a really good reason, you should probably sign your zone using <b>ECDSA256</b><P>"
+		+ "<b>NSEC</b> is more space & bandwidth efficient than <b>NSEC3</b>.<br><b>NSEC3</b> will enlarge your zone by typically twice as much as <b>NSEC</b>, but <b>NSEC</b> exposes all your DNS names in a linked list.<P>"
 		+ "<b>CSK</b> uses one key instead of two, but means your zone will double in size during key rollover.<br>With <b>KSK+ZSK</b> you have two keys to roll-over, but you can keep the same zone size during the process."
 		+ "</td></tr></table>"
 
@@ -1479,21 +1467,21 @@ function doAddKey()
 
 function clickAddKey()
 {
-	let x = "<form onSubmit='return doAddKey();' name=addKeyForm><table>"
+	let x = "<form onSubmit='return doAddKey();' name=addKeyForm><table align=center>"
 		+ "<tr><td><div style='height: 15px;'></div></td></tr>"
 		+ "<tr><th colspan=2>Add a DNSSEC Key</th></tr>"
-		+ "<tr><td class=formPrompt>Key Type :</td><td><select name=keyKind>";
+		+ "<tr><Td class=formPrompt>Key Type :</td><td><select name=keyKind>";
 
 	["ksk","zsk","csk"].forEach(i => { x += `<option value=${i}>${i.toUpperCase()}` } );
 
 	x += `</select></td></tr>${addAlg("addKeyForm")}`;
 
-	x += "<tr><td class=formPrompt>Key Active :</td><td><select name=keyActive>";
+	x += "<tr><Td class=formPrompt>Key Active :</td><td><select name=keyActive>";
 	["true","false"].forEach(i => { x += `<option>${i}`; });
 	x += "</select></td></tr>";
 
 	x += "<tr><td><div style='height: 15px;'></div></td></tr>"
-		+ "<tr><td colspan=2>"
+		+ "<tr><td align=center colspan=2>"
 		+ btn("cancelAddKey()","Cancel",`Do not add a key to the zone ${ctx.zone}`)
 		+ btn("doAddKey()","Add a Key",`Add a key to the zone ${ctx.zone}`)
 		+ "</td></tr><tr><td><div style='height: 15px;'></div></td></tr>"
@@ -1639,7 +1627,7 @@ function clickDnssecKey(idx)
 
 	let sz = 150;
 	let k = ctx.zoneKeys[idx];
-	let x = "<table>";
+	let x = "<table align=center>";
 	let txt = `Activate Key-${k.id}`;
 	if (k.active) txt = `Deactivate Key-${k.id}`;
 
@@ -1671,9 +1659,9 @@ function showKeys(data)
 	ctx.zoneKeys = data;
 	setState(`${gbl.server}: ${ctx.zone}, DNSSEC Keys`, { state: "keys", server: gbl.server, zone: ctx.zone, keys:true });
 
-	let x = "<table width=100%>";
-	x += "<tr><td width=100%><table width=100%><colgroup>";
-	for(let i=0;i<5;i++) x += '<col width="50">';
+	let x = "<table width=100% border=0 cellspacing=0 cellpadding=0>";
+	x += "<tr><td width=100%><table width=100% border=0 cellspacing=1 cellpadding=0><colgroup>";
+	for(let i=0;i<5;i++) x += '<col width="50px">';
 	x += "</colgroup><tr>";
 
 	for (let i of ["Active","Id","Type/Flags","Bits","Algrythm",""])
@@ -1683,16 +1671,16 @@ function showKeys(data)
 	let keyTypes = { num: 0 };
 
 	if (("nsec3param" in ctx.zoneDetails)&&(ctx.zoneDetails.nsec3param != "")) {
-		x += `<tr class=dataRow><td>${gbl.tick}`
+		x += `<tr class=dataRow><td align=center>${gbl.tick}`
 			+ `</td><td colspan=3></td><td>NSEC3PARAM</td><td>${ctx.zoneDetails.nsec3param.toUpperCase()}</td></tr>`
 		}
 
 	for(let idx in data) {
 		i = data[idx];
-		x += `<tr onClick='clickDnssecKey(${idx});' class=dataRow><td>`
+		x += `<tr onClick='clickDnssecKey(${idx});' class=dataRow><td align=center>`
 		let aflag = 0;
 		if (i.active) { aflag=1; x += gbl.tick; } else x += gbl.cross;
-		x += `</td><td>${i.id}</td>`;
+		x += `</td><td align=center>${i.id}</td>`;
 
 		if (i.keytype in keyTypes) {
 			let k = keyTypes[i.keytype];
@@ -1705,8 +1693,8 @@ function showKeys(data)
 			keyTypes.num++;
 			}
 
-		x += `<td>${i.keytype.toUpperCase()}/${i.flags}</td>`
-			+ `<td>${i.bits}</td>`
+		x += `<td align=center>${i.keytype.toUpperCase()}/${i.flags}</td>`
+			+ `<td align=center>${i.bits}</td>`
 			+ `<td align=left>${i.algorithm}`
 			+ `</td><td class=dnskey>${i.dnskey.substr(1,50)}...</td></tr>`;
 
@@ -1737,7 +1725,7 @@ function showKeys(data)
 	x += "</td></tr></table>";
 
 	sz = 200
-	x += "<div id='dnssecTop'><table0>"
+	x += "<div id='dnssecTop'><table align=center cellspacing=10 cellpadding=0 border=0>"
 
 	let notes = "If your zone is currently validating, after <b>every</b> Key Rollover step you must leave a few days<br>"
 		+ "for the internet to take-up your change. Probably a minimum of around 3 to 4 days";
@@ -1755,8 +1743,8 @@ function showKeys(data)
 			let cid1 = keyTypes.csk.ids[keyTypes.csk.ids.length-1].idx;
 
 			let csk_rollover = [
-				`<tr><td>Step 1 of 2: </td><td>${btn(`startCSK(${cid0})`,"Start CSK Rollover","Start a CSK Rollover",sz)}</td></tr>`,
-				`<tr><td>Step 2 of 2: </td><td>${btn(`deleteKey(${cid1})`,"Complete CSK Rollover","Complete a CSK Rollover",sz)}</td></tr>`,
+				`<tr><td>Step 1 of 2: </td><Td>${btn(`startCSK(${cid0})`,"Start CSK Rollover","Start a CSK Rollover",sz)}</td></tr>`,
+				`<tr><td>Step 2 of 2: </td><Td>${btn(`deleteKey(${cid1})`,"Complete CSK Rollover","Complete a CSK Rollover",sz)}</td></tr>`,
 				]
 
 			if (keyTypes.csk.num == 1) key_txt = csk_rollover[0];
@@ -1781,21 +1769,21 @@ function showKeys(data)
 			let zid1 = keyTypes.zsk.ids[keyTypes.zsk.ids.length-1].idx;
 
 			let ksk_rollover = [
-				`<tr><td>${ksk_link}Step 1 of 2</a>: </td><td>`
+				`<tr><td>${ksk_link}Step 1 of 2</a>: </td><Td>`
 					+ btn(`startKSK(${kid0})`,"Start KSK Rollover","Start a KSK Rollover",sz) + "</td></tr>",
 
-				`<tr><td>${ksk_link}Step 2 of 2</a>: </td><td>`
+				`<tr><td>${ksk_link}Step 2 of 2</a>: </td><Td>`
 						 + btn(`deleteKey(${kid1})`,"Complete KSK Rollover","Complete the KSK Rollover",sz) + "</td></tr>",
 				];
 
 			let zsk_rollover = [
-				`<tr><td>${zsk_link}Step 1 of 3</a>: </td><td>`
+				`<tr><td>${zsk_link}Step 1 of 3</a>: </td><Td>`
 					 + btn(`startZSK(${zid0})`,"Start ZSK Rollover","Start a ZSK Rollover",sz) + "</td></tr>",
 
-				`<tr><td>${zsk_link}Step 2 of 3</a>: </td><td>`
+				`<tr><td>${zsk_link}Step 2 of 3</a>: </td><Td>`
 					+ btn(`activateZSK(${zid0},${zid1})`,"Activate ZSK Rollover","Activate the ZSK Rollover",sz) + "</td></tr>",
 
-				`<tr><td>${zsk_link}Step 3 of 3</a>: </td><td>`
+				`<tr><td>${zsk_link}Step 3 of 3</a>: </td><Td>`
 					+ btn(`deleteKey(${zid1})`,"Complete ZSK Rollover","Complete the ZSK Rollover",sz) + "</td></tr>",
 				];
 
@@ -1807,9 +1795,9 @@ function showKeys(data)
 				key_txt = ksk_rollover[1];
 
 				notes = "<u>If you have only just created a new KSK, wait a few days before changing your DS records</u>"
-					+ "<p>Once you have changed your DS reocrds, wait a few more days before completing the KSK rollover.</p>"
-					+ `<p>The DS records for Key-Id: ${keyTypes.ksk.ids[0].id}, should be the only ones present<br>`
-					+ "in the parent zone, for a few days, before completing the KSK rollover.</p>";
+					+ "<P>Once you have changed your DS reocrds, wait a few more days before completing the KSK rollover."
+					+ `<P>The DS records for Key-Id: ${keyTypes.ksk.ids[0].id}, should be the only ones present<br>`
+					+ "in the parent zone, for a few days, before completing the KSK rollover.";
 				}
 
 			if (keyTypes.zsk.num == 1)
@@ -1921,9 +1909,9 @@ function clickAddZone(isFresh)
 
 function dropZone()
 {
-	let x = "<table><tr><td><h3>Are you sure you want to delete"
+	let x = "<table align=center><tr><td align=center><h3>Are you sure you want to delete"
 		+ `<br>the zone '${ctx.zone}' and all its records ?</h3></td></tr>`
-		+ "<tr><td>"
+		+ "<tr><td align=center>"
 		+ btn("loadThisZone();","Cancel",`Do not delete the zone ${ctx.zone}`)
 		+ "&nbsp;"
 		+ btn("doDropZone()",`Drop '${ctx.zone}'`,`Delete the zone ${ctx.zone} and ALL its records`);
@@ -2047,8 +2035,8 @@ function zoneDetails(data)
 
 	setState(`${gbl.server}: ${ctx.zone}`, { state: "zone", server: gbl.server, zone: ctx.zone });
 
-	let x = "<table width=100%>"
-		+ "<tr><td width=100%><table width=100%>";
+	let x = "<table width=100% border=0 cellspacing=0 cellpadding=0>"
+		+ "<tr><td width=100%><table width=100% border=0 cellspacing=0 cellpadding=0>";
 
 	for(let i of data.rrsets) {
 		x += `<tr onClick="clickZoneRecord('${i.name}','${i.type}');" class=dataRow>`
@@ -2076,7 +2064,7 @@ function zoneDetails(data)
 	let sp = "<div style='height: 7px;'></div>";
 	let sz = 100;
 
-	x += "</table></td><td>";
+	x += "</table></td><td align=center>";
 
 	if (ctx.zoneDetails.kind != "Slave")
 		x += btn("zoneAddHost()","Add Host",`Add a host to the zone ${ctx.zone}`,sz) + sp;
@@ -2155,7 +2143,7 @@ function searchResults(data)
 
 	ctx = { searchTerm: ctx.searchTerm }; topLine(); ctx = {};
 
-	let x = "<table width=100%>";
+	let x = "<table width=100% border=0 cellspacing=0 cellpadding=0>";
 	for(let i of data) {
 		x += "<tr class=dataRow";
 		if (i.object_type != "zone") {
@@ -2282,12 +2270,12 @@ function showTSIG(tsig)
 		setState(`${gbl.server}: TSIG ${data.id}`, { state: "tsigdata", server: gbl.server, tsig: data.id });
 		ctx = {}; topLine();
 
-		let x = "<table style='margin-top: 50px;'>"
+		let x = "<table style='margin-top: 50px;' align=center border=0 cellspacing=0 cellpadding=0>"
 			+ `<tr class=dataRow onClick=\"clickTSIG('${data.id}','Name');\"><td class=formPrompt>TSIG Name :</td><td>${data.id}</td></tr>`
 			+ `<tr><td class=formPrompt>TSIG Algorithm :</td><td>${data.algorithm.toUpperCase()}</td></tr>`
 			+ `<tr onClick=\"clickTSIG('${data.key}','Key');\" class=dataRow><td class=formPrompt>TSIG Key :</td><td>${data.key}</td></tr>`
-			+ "<tr><td colspan=2><hr></td></tr>"
-			+ "<tr><td colspan=2>"
+			+ "<tr><td align=center colspan=2><hr></td></tr>"
+			+ "<tr><td align=center colspan=2>"
 			+ btn("loadTsigList()","Back","Go back to the list of TSIGs")
 			+ btn(`regenTSIG('${data.id}','${data.algorithm}')`,"Rollover","Replace this TSIG Key, keeping the name")
 			+ btn(`deleteTSIG('${data.id}')`,"Delete","Delete this TSIG Key")
@@ -2319,9 +2307,9 @@ function showTsigList(data)
 	setState(`${gbl.server}: TSIGs`, { state: "tsig", server: gbl.server, tsig: true });
 	ctx = {}; topLine();
 
-	let x = "<table width=100%>"
-		+ "<colgroup><col width=100%><col></colgroup><tr><td>"
-		+ "<table cellspacing=2 cellpadding=2>"
+	let x = "<table width=100% border=0 cellspacing=0 cellpadding=0>"
+		+ "<colgroup><col width=100%/><col/></colgroup><tr><Td>"
+		+ "<table align=center border=0 cellspacing=2 cellpadding=2>"
 		+ "<tr><th>TSIG Name</td><th>Algorithm</td></tr>";
 
 	for(let i of data)
@@ -2433,8 +2421,8 @@ function zoneListDetails(data)
 
 	setState(`${gbl.server}: Zone List`, { state: "zonelist", server: gbl.server });
 
-	let x = "<table width=100%><colgroup><col width=100%><col></colgroup>"
-	x += "<tr><td><table width=100%>";
+	let x = "<table border=0 cellspacing=0 cellpadding=0 width=100%><colgroup><col width=100%/><col/></colgroup>"
+	x += "<tr><td><table width=100% border=0 cellspacing=0 cellpadding=0>";
 	for(let i of data) {
 		x += `<tr class=dataRow onClick='zoneDetailsLoad("${i.name}")'>`
 			+ `<td>${i.name}</td><td>${i.kind}</td>`;
@@ -2512,7 +2500,7 @@ function validInt(x) {
 function btn(call,txt,hlp,sz) {
 	let ex=""
 	if (sz != null) ex = `style='width: ${sz}px;'`
-	return `<button type="button" ${ex} title="${hlp}" onclick="${call};">${txt}</button>`;
+	return `<span ${ex} title="${hlp}" class=myBtn onClick="${call}; return false;">${txt}</span>`;
 }
 
 
@@ -2528,7 +2516,7 @@ function topLine()
 
 	gbl.forms.forEach(i => i.style.display = "none");
 
-	let y = "<table style='margin-top:10px;' width=100%><tr><td width=1 class=dataRow>"
+	let y = "<table style='margin-top:10px;' border=0 cellspacing=0 cellpadding=0 width=100%><tr><td width=1 class=dataRow>"
 		+ `<font size=+1><a title='Open this page in a new window' target=_blank href='${window.origin}${gbl.pathname}?`;
 
 	let x = `'>${gbl.page}</a></font></td><td>`
@@ -2564,7 +2552,7 @@ function topLine()
 			x += btn(`oneStat('${gbl.state.stats}')`,gbl.state.stats,`View the server stat - ${gbl.state.stats}`);
 		}
 
-	x += "</td><td width=100%><span class='fullvis' id='showMsg'></span></td><td>";
+	x += "</td><td width=100% align=center><span class='fullvis' id='showMsg'></span></td><td>";
 
 	if ("zone" in ctx) {
 		if ("edit" in ctx) {
@@ -2593,7 +2581,7 @@ function topLine()
 			x += btn("loadStats()","Stats","View the server stats");
 		}
 
-	x += "</td><td width=1 align=right><form name=searchForm onsubmit='return searchFormSubmit();'>"
+	x += "</td><td width=1 align=right><form name=searchForm onSubmit='return searchFormSubmit();'>"
 		+ "<input placeholder='Search' size=30 name=searchTerm></form></td>"
 		+ "</tr><table><hr>";
 
@@ -2791,153 +2779,117 @@ function keyEsc(e) {
 
 //=============================================================================================
 </script>
+
+
+
+<head>
+	<title>PowerDNS WebUI - Login</title>
 </head>
+<body onLoad="startUp();">
 
-<body onload="startUp();">
-
-<div id="topSpan"><h1>PowerDNS WebUI</h1></div>
+<div id="topSpan">
+<table border=0 cellspacing=0 cellpadding=0 width=100%>
+<tr><td><h1 style="text-align:center">PowerDNS WebUI</h1></td></tr>
+</table>
+</div>
 
 <div id="lowerSpan">
-	<form action="/" onsubmit="return initialLogin()" name="loginForm">
-		<table>
-			<tr><td class="formPrompt">Server:</td><td><input title="PowerDNS RestAPI, can include optional :[port] and sub-directory" name="server" size="40" value=""></td></tr>
-			<tr><td class="formPrompt">API-Key:</td><td><input autocomplete="current-password" type="password" size="40" name="apikey" value=""></td></tr>
-			<tr><td class="formPrompt">HTTPS (SSL/TLS):</td><td><input title="Connect to API over HTTPS, not HTTP" type="checkbox" name="with_https"></td></tr>
-			<tr><td class="formPrompt">Fast Zone List:</td><td><input title="Fast load long zone lists by excluding some information" type="checkbox" name="fast_zone_list"></td></tr>
-			<tr><td></td><td><button type="button" title="Load zone list" onclick="initialLogin()">Load Zone List</button></td></tr>
-		</table>
+	<table align=center>
+	<form action="/" onSubmit="return initialLogin()" name=loginForm>
+		<tr><td class=formPrompt>Server:</td><td><input title="PowerDNS RestAPI, can include optional :[port] and sub-directory" name=server size=40 value=""></td></tr>
+		<tr><td class=formPrompt>API-Key:</td><td><input autocomplete="current-password" type=password size=40 name=apikey value=""></td></tr>
+		<tr><td class=formPrompt>HTTPS (SSL/TLS):</td><td><input title="Connect to API over HTTPS, not HTTP" type=checkbox name=with_https></td></tr>
+		<tr><td class=formPrompt>Fast Zone List:</td><td><input title="Fast load long zone lists by excluding some information" type=checkbox name=fast_zone_list></td></tr>
+		<tr><td align=center colspan=2><span title="Load zone list" class=myBtn onClick="initialLogin()">Load Zone List</span></td></tr>
+		</tr>
+	<input type=submit style="display: none;">
 	</form>
-	<div class="fullvis" id="lowerMsg"></div>
+	</table>
+<P>
+<div class='fullvis' id="lowerMsg"></div>
 </div>
 
 
-<div id="addZone">
-	<form method="post" action="/" name="newZoneForm" onsubmit="return doNewZone();">
-		<h2>Add a New Zone</h2>
-		<table>
-		<colgroup><col width="35%"><col width="65%"></colgroup>
-		<tbody id="startBody">
-			<tr><td class="formPrompt">Name :</td><td><input onkeydown="keyEsc(event);" name="zoneName"></td></tr>
-			<tr><td class="formPrompt">Type :</td><td>
-				<select onchange="zoneKindChange(this);" name="zoneKind">
-					<option>Master</option>
-					<option>Slave</option>
-					<option>Native</option>
-				</select>
-			</td></tr>
-			</tbody>
-			<tbody id="asMaster">
-				<tr><td class="formPrompt">Name Servers :</td><td>
-					<input size="40" name="ns0"><br>
-					<input size="40" name="ns1"><br>
-					<input size="40" name="ns2"><br>
-					<input size="40" name="ns3"><br></td></tr>
-			</tbody>
-			<tbody id="asSlave">
-				<tr><td class="formPrompt">Master's IPs :</td><td>
-					<input size="40" name="ip0"><br>
-					<input size="40" name="ip1"><br>
-					<input size="40" name="ip2"><br>
-					<input size="40" name="ip3"><br></td></tr>
-			</tbody>
-			<tr><td colspan="2"><hr></td></tr>
-			<tr><td></td><td><button type="button" title="Cancel adding zone" onclick="zoneList();">Cancel</button><button type="button" title="Add new zone" onclick="doNewZone();">Add Zone</button></td></tr>
-		</table>
+
+<div id=addZone style="display: none;">
+	<table width=40% align=center><tbody id="startBody">
+	<colgroup><col width=35%/><col width=65%/></colgroup>
+	<tr><td colspan=2 align=center><h2>Add a New Zone</h2></td></tr>
+	<form method=post action="/" name=newZoneForm onSubmit="return doNewZone();">
+		<tr><td class=formPrompt>Name :</td><td><input onkeydown="keyEsc(event);" name=zoneName></td></tr>
+		<tr><td class=formPrompt>Type :</td><td><select onChange="zoneKindChange(this);" name=zoneKind><option>Master<option>Slave<option>Native</select></td></tr>
+		</tbody><tbody id="asMaster">
+			<tr><td class=formPrompt>Name Servers :</td><td>
+				<input size=40 name=ns0><br>
+				<input size=40 name=ns1><br>
+				<input size=40 name=ns2><br>
+				<input size=40 name=ns3><br></td></tr>
+		</tbody><tbody id="asSlave" style="display: none;">
+			<tr><td class=formPrompt>Master's IPs :</td><td>
+				<input size=40 name=ip0><br>
+				<input size=40 name=ip1><br>
+				<input size=40 name=ip2><br>
+				<input size=40 name=ip3><br></td></tr>
+		</tbody>
+		<tr><td colspan=2><hr></td></tr>
+		<tr><td align=center colspan=2><span title="Cancel adding zone" class=myBtn onClick="zoneList();">Cancel</span><span title="Add new zone" class=myBtn onClick="doNewZone();">Add Zone</span></td></tr>
+		</tr>
+	<input type=submit style="display: none;">
 	</form>
+	</table>
 </div>
 
 
-<div id="addName">
-	<form method="post" action="/" name=newNameForm onsubmit="return doNewName();">
-		<h2>Add a New Host</h2>
-		<table>
-		<colgroup><col width="35%"><col width="65%"></colgroup>
-			<tr><td class="formPrompt">Host name:</td><td><input onkeydown="keyEsc(event);" name="rrName"></td></tr>
-			<tr><td class="formPrompt">RR Type:</td><td><select name="rrType">
-				<option>A</option>
-				<option>AAAA</option>
-				<option>MX</option>
-				<option>NS</option>
-				<option>TXT</option>
-				<option value="CATALOG">Add Zone to Catalog</option>
-				<option>A6</option>
-				<option>ADDR</option>
-				<option>AFSDB</option>
-				<option>ALIAS</option>
-				<option>CAA</option>
-				<option>CDNSKEY</option>
-				<option>CDS</option>
-				<option>CERT</option>
-				<option>CNAME</option>
-				<option>DHCID</option>
-				<option>DLV</option>
-				<option>DNAME</option>
-				<option>DNSKEY</option>
-				<option>DS</option>
-				<option>EUI48</option>
-				<option>EUI64</option>
-				<option>HINFO</option>
-				<option>IPSECKEY</option>
-				<option>KEY</option>
-				<option>KX</option>
-				<option>LOC</option>
-				<option>LUA</option>
-				<option>MAILA</option>
-				<option>MAILB</option>
-				<option>MB</option>
-				<option>MG</option>
-				<option>MINFO</option>
-				<option>MR</option>
-				<option>MX</option>
-				<option>NAPTR</option>
-				<option>NS</option>
-				<option>OPENPGPKEY</option>
-				<option>OPT</option>
-				<option>PTR</option>
-				<option>RKEY</option>
-				<option>RP</option>
-				<option>RRSIG</option>
-				<option>SIG</option>
-				<option>SMIMEA</option>
-				<option>SOA</option>
-				<option>SPF</option>
-				<option>SRV</option>
-				<option>SSHFP</option>
-				<option>TKEY</option>
-				<option>TLSA</option>
-				<option>TXT</option>
-				<option>URI</option>
-				<option>WKS</option>
-			</select></td></tr>
-			<tr><td class="formPrompt">TTL:</td><td><input value="86400" name="rrTTL"></td></tr>
-			<tr><td colspan="2"><hr></td></tr>
-			<tr><td></td><td><button type="button" title="Cancel adding RR" onclick="loadThisZone();">Cancel</button><button type="button" title="Add this RR" onclick="doNewName();">Add Record</button></td></tr>
-		</table>
+
+<div id=addName style="display: none;">
+	<table width=40% align=center>
+	<colgroup><col width=35%/><col width=65%/></colgroup>
+	<tr><td colspan=2 align=center><h2>Add a New Host</h2></td></tr>
+	<form method=post action="/" name=newNameForm onSubmit="return doNewName();">
+		<tr><td class=formPrompt>Host name:</td><td><input onkeydown="keyEsc(event);" name=rrName></td></tr>
+		<tr><td class=formPrompt>RR Type:</td><td><select name=rrType>
+			<option>A<option>AAAA<option>MX<option>NS<option>TXT
+			<option value=CATALOG>Add Zone to Catalog
+
+			<option>A6<option>ADDR<option>AFSDB<option>ALIAS
+			<option>CAA<option>CDNSKEY<option>CDS<option>CERT
+			<option>CNAME<option>DHCID<option>DLV<option>DNAME<option>DNSKEY<option>DS
+			<option>EUI48<option>EUI64<option>HINFO<option>IPSECKEY<option>KEY
+			<option>KX<option>LOC<option>LUA<option>MAILA<option>MAILB<option>MB
+			<option>MG<option>MINFO<option>MR<option>MX<option>NAPTR<option>NS
+			<option>OPENPGPKEY<option>OPT<option>PTR
+			<option>RKEY<option>RP<option>RRSIG<option>SIG<option>SMIMEA<option>SOA
+			<option>SPF<option>SRV<option>SSHFP<option>TKEY<option>TLSA<option>TXT
+			<option>URI<option>WKS
+
+		</select></td></tr>
+		<tr><td class=formPrompt>TTL:</td><td><input value=86400 name=rrTTL></td></tr>
+		<tr><td colspan=2><hr></td></tr>
+		<tr><td align=center colspan=2><span class=myBtn title="Cancel adding RR" onClick="loadThisZone();">Cancel</span><span title="Add this RR" class=myBtn onClick="doNewName();">Add Record</span></td></tr>
+		</tr>
+	<input type=submit style="display: none;">
 	</form>
+	</table>
 </div>
 
 
-<div id="addTsig">
-	<form method="post" action="/" name=newTsigForm onsubmit="return formAddTsig();">
-		<h2>Add a New TSIG Key</h2>
-		<table>
-			<colgroup><col width="35%"><col width="65%"></colgroup>
-			<tr><td class="formPrompt">TSIG Name: </td><td><input size="50" name="tsigName"></td></tr>
-			<tr><td class="formPrompt">TSIG Algrythm: </td><td><select name="tsigAlg">
-				<option value="hmac-sha512">HMAC-SHA512</option>
-				<option value="hmac-sha384">HMAC-SHA384</option>
-				<option value="hmac-sha256">HMAC-SHA256</option>
-				<option value="hmac-sha224">HMAC-SHA224</option>
-				<option value="hmac-sha1">HMAC-SHA1</option>
-				<option value="hmac-md5">HMAC-MD5</option>
-			</select></td></tr>
-			<tr><td class="formPrompt">TSIG Key: </td><td><input placeholder="Leave blank, for auto-generated key" size="100" name="tsigKey"></td></tr>
-			<tr><td colspan="2"><hr></td></tr>
-			<tr><td></td><td><button type="button" title="Cancel adding a TSIG Key" onclick="loadTsigList();">Cancel</button><button type="button" title="Add this TSIG Key" onclick="formAddTsig();">Add TSIG</button></td></tr>
-		</table>
+<div id=addTsig style="display: none;">
+	<table width=40% align=center>
+	<colgroup><col width=35%/><col width=65%/></colgroup>
+	<tr><td colspan=2 align=center><h2>Add a New TSIG Key</h2></td></tr>
+	<form method=post action="/" name=newTsigForm onSubmit="return formAddTsig();">
+		<tr><Td class=formPrompt>TSIG Name: </td><td><input size=50 name=tsigName></td></tr>
+		<tr><td class=formPrompt>TSIG Algrythm: </td><td><select name=tsigAlg>
+			<option value="hmac-sha512">HMAC-SHA512<option value="hmac-sha384">HMAC-SHA384<option value="hmac-sha256">HMAC-SHA256
+			<option value="hmac-sha224">HMAC-SHA224<option value="hmac-sha1">HMAC-SHA1<option value="hmac-md5">HMAC-MD5
+		</select></td></tr>
+		<tr><Td class=formPrompt>TSIG Key: </td><td><input placeholder='Leave blank, for auto-generated key' size=100 name=tsigKey></td></tr>
+		<tr><td colspan=2><hr></td></tr>
+		<tr><td align=center colspan=2><span class=myBtn title="Cancel adding a TSIG Key" onClick="loadTsigList();">Cancel</span><span title="Add this TSIG Key" class=myBtn onClick="formAddTsig();">Add TSIG</span></td></tr>
+	<input type=submit style="display: none;">
 	</form>
+	</table>
 </div>
 
-<div id="myMsgPop" class="msgPop msgPopNo"></div>
-</body>
-</html>
+<div id=myMsgPop class='msgPop msgPopNo'></div>
+</body></html>
